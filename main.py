@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 from typing import Dict, List
 import pandas as pd
+import numpy as np
 
 # Add src to path
 sys.path.append(str(Path(__file__).parent / "src"))
@@ -82,8 +83,71 @@ class TradingStrategyDiscoverySystem:
             logger.info("Step 5: Backtesting strategies...")
             self.strategy_results = self._backtest_strategies(all_strategies)
             
-            # Step 6: Rank and select top strategies
+            # Step 6: Ranking and selecting top strategies
             logger.info("Step 6: Ranking and selecting top strategies...")
+            print("Step 6: Ranking and selecting top strategies...")
+            
+            # Get all backtest results
+            all_results = self.backtester.get_all_results()
+            
+            # Sort by total return
+            all_results.sort(key=lambda x: x.metrics.get('total_return', 0), reverse=True)
+            
+            # Show top 50 strategies
+            print("\n" + "="*80)
+            print("TOP 50 STRATEGIES BY TOTAL RETURN")
+            print("="*80)
+            
+            for i, result in enumerate(all_results[:50]):
+                metrics = result.metrics
+                print(f"\n{i+1:2d}. {result.strategy_name}")
+                print(f"    Description: {result.get_strategy_description()}")
+                print(f"    Total Return: {metrics.get('total_return', 0):.4f}")
+                print(f"    Annual Return: {metrics.get('annual_return', 0):.4f}")
+                print(f"    Sharpe Ratio: {metrics.get('sharpe_ratio', 0):.4f}")
+                print(f"    Win Rate: {metrics.get('win_rate', 0):.4f}")
+                print(f"    Max Drawdown: {metrics.get('max_drawdown', 0):.4f}")
+                print(f"    Profit Factor: {metrics.get('profit_factor', 0):.4f}")
+                print(f"    Number of Trades: {metrics.get('num_trades', 0)}")
+                print(f"    Volatility: {metrics.get('volatility', 0):.4f}")
+            
+            # Save top 50 to CSV
+            top_50_data = []
+            for i, result in enumerate(all_results[:50]):
+                metrics = result.metrics
+                top_50_data.append({
+                    'rank': i + 1,
+                    'strategy_name': result.strategy_name,
+                    'description': result.get_strategy_description(),
+                    'category': result.parameters.get('category', 'Unknown'),
+                    'timeframe': result.parameters.get('timeframe', 'Unknown'),
+                    'total_return': metrics.get('total_return', 0),
+                    'annual_return': metrics.get('annual_return', 0),
+                    'sharpe_ratio': metrics.get('sharpe_ratio', 0),
+                    'win_rate': metrics.get('win_rate', 0),
+                    'max_drawdown': metrics.get('max_drawdown', 0),
+                    'profit_factor': metrics.get('profit_factor', 0),
+                    'num_trades': metrics.get('num_trades', 0),
+                    'volatility': metrics.get('volatility', 0)
+                })
+            
+            df = pd.DataFrame(top_50_data)
+            output_file = "results/top_50_strategies.csv"
+            df.to_csv(output_file, index=False)
+            print(f"\n✅ Top 50 strategies saved to: {output_file}")
+            
+            # Show summary statistics
+            print(f"\n" + "="*80)
+            print("SUMMARY STATISTICS")
+            print("="*80)
+            print(f"Total strategies tested: {len(all_results)}")
+            print(f"Best total return: {all_results[0].metrics.get('total_return', 0):.4f}")
+            print(f"Worst total return: {all_results[-1].metrics.get('total_return', 0):.4f}")
+            print(f"Average total return: {np.mean([r.metrics.get('total_return', 0) for r in all_results]):.4f}")
+            print(f"Average win rate: {np.mean([r.metrics.get('win_rate', 0) for r in all_results]):.4f}")
+            print(f"Average Sharpe ratio: {np.mean([r.metrics.get('sharpe_ratio', 0) for r in all_results]):.4f}")
+            
+            # Continue with ranking
             ranking_report = self._rank_strategies()
             
             # Step 7: Generate reports and visualizations

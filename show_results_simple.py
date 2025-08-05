@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-Show raw backtest results without filtering
+Simple script to show top 50 strategies
 """
 
 import pandas as pd
 import numpy as np
 from pathlib import Path
 
-def show_raw_results():
-    """Show raw backtest results"""
+def show_results_simple():
+    """Show results in a simple way"""
     print("="*80)
-    print("RAW BACKTEST RESULTS FROM 960 STRATEGIES")
+    print("TOP 50 TRADING STRATEGIES FROM 960 TESTED")
     print("="*80)
     
     # Check if we have any results files
@@ -69,4 +69,4 @@ def show_raw_results():
     print("3. Or try different time periods")
 
 if __name__ == "__main__":
-    show_raw_results()
+    show_results_simple()

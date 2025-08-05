@@ -14,20 +14,11 @@ logger = logging.getLogger(__name__)
 class Backtester:
     """Backtesting engine for strategy evaluation"""
     
-    def __init__(self, initial_capital: float = INITIAL_CAPITAL,
-                 commission_rate: float = COMMISSION_RATE,
-                 slippage: float = SLIPPAGE):
-        """
-        Initialize backtester
-        
-        Args:
-            initial_capital: Initial capital for backtesting
-            commission_rate: Commission rate per trade
-            slippage: Slippage per trade
-        """
-        self.initial_capital = initial_capital
+    def __init__(self, commission_rate=0.001, slippage=0.0001):
+        self.initial_capital = 100000  # Add initial capital
         self.commission_rate = commission_rate
         self.slippage = slippage
+        self.save_results = True  # Always save results
     
     def backtest_strategy(self, strategy: BaseStrategy, data: pd.DataFrame) -> StrategyResult:
         """
@@ -235,6 +226,30 @@ class Backtester:
         
         summary_df['composite_rank'] = summary_df['composite_score'].rank(ascending=False)
         
+        # Add composite score to summary
+        summary_df['composite_score'] = summary_df.apply(self._calculate_composite_score, axis=1)
+        
+        # Store all results
+        self.all_results = results
+        
+        # Save backtest results if requested
+        if hasattr(self, 'save_results') and self.save_results:
+            import pickle
+            from pathlib import Path
+            
+            results_dir = Path("results")
+            results_dir.mkdir(exist_ok=True)
+            
+            # Save all results
+            with open(results_dir / "all_backtest_results.pkl", 'wb') as f:
+                pickle.dump(results, f)
+            
+            # Save summary
+            with open(results_dir / "backtest_summary.pkl", 'wb') as f:
+                pickle.dump(summary_df, f)
+            
+            print(f"✅ Saved {len(results)} backtest results to results/all_backtest_results.pkl")
+        
         return summary_df
     
     def get_strategy_details(self, result: StrategyResult) -> Dict:
@@ -298,3 +313,7 @@ class Backtester:
                 current_period += 1
         
         return max_period
+
+    def get_all_results(self) -> List[StrategyResult]:
+        """Get all backtest results"""
+        return self.all_results if hasattr(self, 'all_results') else []
