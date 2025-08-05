@@ -36,31 +36,9 @@ class StrategyRanker:
         self.min_sharpe_ratio = min_sharpe_ratio
     
     def filter_strategies(self, results: List[StrategyResult]) -> List[StrategyResult]:
-        """
-        Filter strategies based on performance thresholds
-        
-        Args:
-            results: List of StrategyResult objects
-            
-        Returns:
-            List of filtered StrategyResult objects
-        """
-        filtered_results = []
-        
-        for result in results:
-            metrics = result.metrics
-            
-            # Check if strategy meets minimum thresholds
-            if (metrics['win_rate'] >= self.min_win_rate and
-                metrics['profit_factor'] >= self.min_profit_factor and
-                abs(metrics['max_drawdown']) <= self.max_drawdown and
-                metrics['sharpe_ratio'] >= self.min_sharpe_ratio):
-                
-                filtered_results.append(result)
-        
-        logger.info(f"Filtered {len(filtered_results)} strategies from {len(results)} total")
-        
-        return filtered_results
+        """Filter strategies based on performance criteria - NO FILTERING - Show ALL"""
+        # NO FILTERING - Return all results
+        return results
     
     def rank_strategies_by_category(self, results: List[StrategyResult]) -> Dict[str, List[StrategyResult]]:
         """
