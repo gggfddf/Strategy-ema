@@ -281,7 +281,7 @@ class StrategyRanker:
     
     def export_ranking_results(self, report: Dict, output_dir: str):
         """
-        Export ranking results to files
+        Export ranking results to Excel files
         
         Args:
             report: Ranking report dictionary
@@ -293,29 +293,70 @@ class StrategyRanker:
         output_path = Path(output_dir)
         output_path.mkdir(parents=True, exist_ok=True)
         
-        # Export strategy summary
-        strategy_summary = report['strategy_summary']
-        strategy_summary.to_csv(output_path / 'top_strategies.csv', index=False)
+        # Create Excel writer
+        excel_file = output_path / 'trading_strategy_results.xlsx'
         
-        # Export category analysis
-        category_analysis = report['category_analysis']
+        with pd.ExcelWriter(excel_file, engine='openpyxl') as writer:
+            # Export strategy summary
+            strategy_summary = report['strategy_summary']
+            strategy_summary.to_excel(writer, sheet_name='Top_Strategies', index=False)
+            
+            # Export category analysis
+            category_analysis = report['category_analysis']
+            category_analysis.to_excel(writer, sheet_name='Category_Analysis', index=False)
+            
+            # Export detailed results by category
+            for category, strategies in report['top_strategies'].items():
+                category_data = []
+                for strategy in strategies:
+                    # Flatten metrics for Excel
+                    metrics_flat = {}
+                    for key, value in strategy.metrics.items():
+                        if isinstance(value, (int, float, str)):
+                            metrics_flat[f'metric_{key}'] = value
+                        else:
+                            metrics_flat[f'metric_{key}'] = str(value)
+                    
+                    category_data.append({
+                        'strategy_name': strategy.strategy_name,
+                        'description': strategy.get_strategy_description(),
+                        'category': category,
+                        **metrics_flat,
+                        'parameters': str(strategy.parameters)
+                    })
+                
+                category_df = pd.DataFrame(category_data)
+                sheet_name = f'{category}_Strategies'[:31]  # Excel sheet name limit
+                category_df.to_excel(writer, sheet_name=sheet_name, index=False)
+            
+            # Create overview sheet
+            overview_data = []
+            for category, strategies in report['top_strategies'].items():
+                for i, strategy in enumerate(strategies):
+                    overview_data.append({
+                        'rank': i + 1,
+                        'category': category,
+                        'strategy_name': strategy.strategy_name,
+                        'description': strategy.get_strategy_description(),
+                        'sharpe_ratio': strategy.metrics['sharpe_ratio'],
+                        'total_return': strategy.metrics['total_return'],
+                        'annual_return': strategy.metrics['annual_return'],
+                        'win_rate': strategy.metrics['win_rate'],
+                        'max_drawdown': strategy.metrics['max_drawdown'],
+                        'profit_factor': strategy.metrics['profit_factor'],
+                        'num_trades': strategy.metrics['num_trades'],
+                        'volatility': strategy.metrics['volatility']
+                    })
+            
+            overview_df = pd.DataFrame(overview_data)
+            overview_df.to_excel(writer, sheet_name='Overview', index=False)
+        
+        # Also save CSV versions for compatibility
+        strategy_summary.to_csv(output_path / 'top_strategies.csv', index=False)
         category_analysis.to_csv(output_path / 'category_analysis.csv', index=False)
         
-        # Export detailed results by category
-        for category, strategies in report['top_strategies'].items():
-            category_data = []
-            for strategy in strategies:
-                category_data.append({
-                    'strategy_name': strategy.strategy_name,
-                    'description': strategy.get_strategy_description(),
-                    'parameters': strategy.parameters,
-                    'metrics': strategy.metrics
-                })
-            
-            category_df = pd.DataFrame(category_data)
-            category_df.to_csv(output_path / f'{category}_strategies.csv', index=False)
-        
-        logger.info(f"Exported ranking results to {output_path}")
+        logger.info(f"Exported ranking results to Excel file: {excel_file}")
+        logger.info(f"Also saved CSV versions for compatibility")
     
     def get_strategy_recommendations(self, report: Dict) -> Dict[str, List[str]]:
         """
