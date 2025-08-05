@@ -26,25 +26,29 @@ class FeatureEngineer:
             timeframe_data: Dictionary of timeframe DataFrames
             
         Returns:
-            Dictionary with enhanced DataFrames containing all MAs
+            Dictionary with enhanced DataFrames
         """
-        logger.info("Computing all moving averages...")
-        
         enhanced_data = {}
         
         for tf_name, df in timeframe_data.items():
-            logger.info(f"Computing MAs for {tf_name}...")
-            enhanced_df = self._compute_timeframe_mas(df, tf_name)
-            enhanced_data[tf_name] = enhanced_df
-            
+            try:
+                logger.info(f"Computing MAs for {tf_name} timeframe...")
+                enhanced_df = self._compute_timeframe_mas(df, tf_name)
+                enhanced_data[tf_name] = enhanced_df
+                logger.info(f"Completed MAs for {tf_name}: {enhanced_df.shape}")
+            except Exception as e:
+                logger.error(f"Error computing MAs for {tf_name}: {e}")
+                # Return original dataframe if MA computation fails
+                enhanced_data[tf_name] = df
+        
         return enhanced_data
     
     def _compute_timeframe_mas(self, df: pd.DataFrame, tf_name: str) -> pd.DataFrame:
         """
-        Compute all moving averages for a specific timeframe
+        Compute all MAs for a single timeframe
         
         Args:
-            df: OHLCV DataFrame
+            df: DataFrame with OHLCV data
             tf_name: Timeframe name
             
         Returns:
@@ -52,25 +56,32 @@ class FeatureEngineer:
         """
         enhanced_df = df.copy()
         
+        # Collect all new features to avoid DataFrame fragmentation
+        new_features = {}
+        
         # Compute each MA type and period
         for ma_type in self.ma_types:
             for period in self.ma_periods:
                 ma_values = self._compute_ma(df['close'], period, ma_type)
                 col_name = f"{ma_type.lower()}_{period}"
-                enhanced_df[col_name] = ma_values
+                new_features[col_name] = ma_values
                 
                 # Add price vs MA features
-                enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
-                enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+                new_features[f"price_above_{col_name}"] = df['close'] > ma_values
+                new_features[f"price_below_{col_name}"] = df['close'] < ma_values
                 
                 # Add MA slope features
-                enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+                new_features[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
                 
                 # Add distance from MA
-                enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+                new_features[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
                 
                 # Add z-score
-                enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+                new_features[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+        
+        # Add all features at once to avoid fragmentation
+        new_features_df = pd.DataFrame(new_features, index=df.index)
+        enhanced_df = pd.concat([enhanced_df, new_features_df], axis=1)
         
         return enhanced_df
     
@@ -291,12 +302,24 @@ class FeatureEngineer:
                 if slope_col in source_df.columns:
                     enhanced_df[f"trend_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_bullish"] = source_df[slope_col] > 0
                     enhanced_df[f"trend_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_bearish"] = source_df[slope_col] < 0
+                else:
+                    # Create slope if it doesn't exist
+                    ma_values = source_df[ma_col]
+                    slope_values = self._compute_ma_slope(ma_values)
+                    enhanced_df[f"trend_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_bullish"] = slope_values > 0
+                    enhanced_df[f"trend_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_bearish"] = slope_values < 0
                 
                 # Add price vs MA alignment
                 price_above_col = f"price_above_{ma_col}"
                 if price_above_col in source_df.columns:
                     enhanced_df[f"price_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_above"] = source_df[price_above_col]
                     enhanced_df[f"price_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_below"] = ~source_df[price_above_col]
+                else:
+                    # Create price alignment if it doesn't exist
+                    close_col = 'close' if 'close' in source_df.columns else source_df.columns[0]
+                    price_above = source_df[close_col] > source_df[ma_col]
+                    enhanced_df[f"price_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_above"] = price_above
+                    enhanced_df[f"price_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_below"] = ~price_above
         
         return enhanced_df
     
