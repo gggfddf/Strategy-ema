@@ -1,0 +1,272 @@
+"""
+Main execution script for Trading Strategy Discovery System
+"""
+
+import logging
+import sys
+from pathlib import Path
+from typing import Dict, List
+import pandas as pd
+
+# Add src to path
+sys.path.append(str(Path(__file__).parent / "src"))
+
+from src.data.loader import DataLoader
+from src.data.timeframe_generator import TimeframeGenerator
+from src.data.feature_engineer import FeatureEngineer
+from src.strategies.ma_single import SingleMAStrategyGenerator
+from src.strategies.ma_crossover import MACrossoverStrategyGenerator
+from src.strategies.multi_tf import MultiTimeframeStrategyGenerator
+from src.strategies.mean_reversion import MeanReversionStrategyGenerator
+from src.evaluation.backtester import Backtester
+from src.evaluation.ranking import StrategyRanker
+from src.visualization.reports import ReportGenerator
+from config.settings import RESULTS_DIR, DATA_RAW_DIR
+
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('trading_strategy_discovery.log'),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
+logger = logging.getLogger(__name__)
+
+class TradingStrategyDiscoverySystem:
+    """Main system for discovering trading strategies"""
+    
+    def __init__(self):
+        """Initialize the trading strategy discovery system"""
+        self.data_loader = DataLoader()
+        self.timeframe_generator = TimeframeGenerator()
+        self.feature_engineer = FeatureEngineer()
+        self.backtester = Backtester()
+        self.ranker = StrategyRanker()
+        self.report_generator = ReportGenerator()
+        
+        # Strategy generators
+        self.single_ma_generator = SingleMAStrategyGenerator()
+        self.ma_crossover_generator = MACrossoverStrategyGenerator()
+        self.multi_tf_generator = MultiTimeframeStrategyGenerator()
+        self.mean_reversion_generator = MeanReversionStrategyGenerator()
+        
+        # Results storage
+        self.timeframe_data = {}
+        self.enhanced_data = {}
+        self.strategy_results = {}
+        
+    def run(self):
+        """Run the complete trading strategy discovery system"""
+        try:
+            logger.info("Starting Trading Strategy Discovery System")
+            
+            # Step 1: Load and validate data
+            logger.info("Step 1: Loading and validating data...")
+            m1_data = self._load_data()
+            
+            # Step 2: Generate timeframes
+            logger.info("Step 2: Generating timeframes...")
+            self.timeframe_data = self._generate_timeframes(m1_data)
+            
+            # Step 3: Feature engineering
+            logger.info("Step 3: Feature engineering...")
+            self.enhanced_data = self._engineer_features()
+            
+            # Step 4: Generate strategies
+            logger.info("Step 4: Generating strategies...")
+            all_strategies = self._generate_strategies()
+            
+            # Step 5: Backtest strategies
+            logger.info("Step 5: Backtesting strategies...")
+            self.strategy_results = self._backtest_strategies(all_strategies)
+            
+            # Step 6: Rank and select top strategies
+            logger.info("Step 6: Ranking and selecting top strategies...")
+            ranking_report = self._rank_strategies()
+            
+            # Step 7: Generate reports and visualizations
+            logger.info("Step 7: Generating reports and visualizations...")
+            self._generate_reports(ranking_report)
+            
+            logger.info("Trading Strategy Discovery System completed successfully!")
+            
+        except Exception as e:
+            logger.error(f"Error in trading strategy discovery system: {e}")
+            raise
+    
+    def _load_data(self) -> pd.DataFrame:
+        """Load and validate 1-minute OHLCV data"""
+        logger.info("Loading 1-minute OHLCV data...")
+        
+        # Check if data files exist
+        if not DATA_RAW_DIR.exists() or not list(DATA_RAW_DIR.glob("*.csv")):
+            logger.error(f"No CSV files found in {DATA_RAW_DIR}")
+            logger.info("Please place your 1-minute OHLCV CSV files in the data/raw/ directory")
+            raise FileNotFoundError(f"No CSV files found in {DATA_RAW_DIR}")
+        
+        # Load data
+        m1_data = self.data_loader.get_combined_data()
+        
+        logger.info(f"Loaded data with shape: {m1_data.shape}")
+        logger.info(f"Date range: {m1_data.index.min()} to {m1_data.index.max()}")
+        
+        return m1_data
+    
+    def _generate_timeframes(self, m1_data: pd.DataFrame) -> Dict[str, pd.DataFrame]:
+        """Generate all timeframes from M1 data"""
+        logger.info("Generating timeframes from M1 data...")
+        
+        timeframe_data = self.timeframe_generator.generate_all_timeframes(m1_data)
+        
+        # Validate generated timeframes
+        if not self.timeframe_generator.validate_timeframe_data(timeframe_data):
+            raise ValueError("Timeframe validation failed")
+        
+        # Get timeframe statistics
+        tf_stats = self.timeframe_generator.get_timeframe_statistics(timeframe_data)
+        logger.info("Timeframe statistics:")
+        logger.info(tf_stats.to_string())
+        
+        return timeframe_data
+    
+    def _engineer_features(self) -> Dict[str, pd.DataFrame]:
+        """Engineer features for all timeframes"""
+        logger.info("Engineering features...")
+        
+        # Compute moving averages
+        enhanced_data = self.feature_engineer.compute_all_moving_averages(self.timeframe_data)
+        
+        # Generate crossover features
+        for tf_name, df in enhanced_data.items():
+            enhanced_data[tf_name] = self.feature_engineer.generate_crossover_features(df)
+        
+        # Generate mean reversion features
+        for tf_name, df in enhanced_data.items():
+            enhanced_data[tf_name] = self.feature_engineer.generate_mean_reversion_features(df)
+        
+        # Generate multi-timeframe features
+        enhanced_data = self.feature_engineer.generate_multi_timeframe_features(enhanced_data)
+        
+        # Get feature summary
+        feature_summary = self.feature_engineer.get_feature_summary(enhanced_data)
+        logger.info("Feature summary:")
+        logger.info(feature_summary.to_string())
+        
+        return enhanced_data
+    
+    def _generate_strategies(self) -> List:
+        """Generate strategies for all categories"""
+        logger.info("Generating strategies...")
+        
+        all_strategies = []
+        
+        # Generate Single MA strategies
+        logger.info("Generating Single MA strategies...")
+        single_ma_strategies = self.single_ma_generator.generate_filtered_strategies(max_periods=50)
+        all_strategies.extend(single_ma_strategies)
+        
+        # Generate MA Crossover strategies
+        logger.info("Generating MA Crossover strategies...")
+        ma_crossover_strategies = self.ma_crossover_generator.generate_filtered_strategies(max_periods=100)
+        all_strategies.extend(ma_crossover_strategies)
+        
+        # Generate Multi-Timeframe strategies
+        logger.info("Generating Multi-Timeframe strategies...")
+        multi_tf_strategies = self.multi_tf_generator.generate_filtered_strategies(max_periods=100)
+        all_strategies.extend(multi_tf_strategies)
+        
+        # Generate Mean Reversion strategies
+        logger.info("Generating Mean Reversion strategies...")
+        mean_reversion_strategies = self.mean_reversion_generator.generate_filtered_strategies(max_periods=100)
+        all_strategies.extend(mean_reversion_strategies)
+        
+        logger.info(f"Generated {len(all_strategies)} total strategies")
+        
+        return all_strategies
+    
+    def _backtest_strategies(self, strategies: List) -> List:
+        """Backtest all strategies"""
+        logger.info("Backtesting strategies...")
+        
+        # Use M1 data for backtesting (most granular)
+        m1_data = self.enhanced_data['M1']
+        
+        # Filter valid strategies
+        valid_strategies = self.backtester.filter_valid_strategies(strategies, m1_data)
+        logger.info(f"Found {len(valid_strategies)} valid strategies out of {len(strategies)}")
+        
+        # Backtest strategies
+        results = self.backtester.backtest_strategies_parallel(valid_strategies, m1_data)
+        
+        return results
+    
+    def _rank_strategies(self) -> Dict:
+        """Rank and select top strategies"""
+        logger.info("Ranking strategies...")
+        
+        # Generate ranking report
+        ranking_report = self.ranker.generate_ranking_report(self.strategy_results)
+        
+        # Export results
+        self.ranker.export_ranking_results(ranking_report, RESULTS_DIR)
+        
+        return ranking_report
+    
+    def _generate_reports(self, ranking_report: Dict):
+        """Generate reports and visualizations"""
+        logger.info("Generating reports and visualizations...")
+        
+        # Generate comprehensive reports
+        self.report_generator.generate_comprehensive_report(ranking_report, RESULTS_DIR)
+        
+        # Generate strategy recommendations
+        recommendations = self.ranker.get_strategy_recommendations(ranking_report)
+        
+        # Print summary
+        self._print_summary(ranking_report, recommendations)
+    
+    def _print_summary(self, ranking_report: Dict, recommendations: Dict):
+        """Print summary of results"""
+        print("\n" + "="*80)
+        print("TRADING STRATEGY DISCOVERY SYSTEM - RESULTS SUMMARY")
+        print("="*80)
+        
+        overview = ranking_report['overview']
+        print(f"\nOverview:")
+        print(f"  Total strategies tested: {overview['total_strategies']}")
+        print(f"  Strategies meeting criteria: {overview['filtered_strategies']}")
+        print(f"  Top strategies selected: {overview['top_strategies_selected']}")
+        print(f"  Categories analyzed: {overview['categories_analyzed']}")
+        
+        print(f"\nTop Strategies by Category:")
+        for category, strategies in ranking_report['top_strategies'].items():
+            print(f"\n  {category.upper()}:")
+            for i, strategy in enumerate(strategies[:3]):  # Top 3 per category
+                metrics = strategy.metrics
+                print(f"    {i+1}. {strategy.strategy_name}")
+                print(f"       Description: {strategy.get_strategy_description()}")
+                print(f"       Sharpe Ratio: {metrics['sharpe_ratio']:.3f}")
+                print(f"       Total Return: {metrics['total_return']:.3f}")
+                print(f"       Win Rate: {metrics['win_rate']:.3f}")
+                print(f"       Max Drawdown: {metrics['max_drawdown']:.3f}")
+        
+        print(f"\nResults exported to: {RESULTS_DIR}")
+        print("="*80)
+
+def main():
+    """Main function"""
+    try:
+        # Create system instance
+        system = TradingStrategyDiscoverySystem()
+        
+        # Run the system
+        system.run()
+        
+    except Exception as e:
+        logger.error(f"Error in main execution: {e}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
