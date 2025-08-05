@@ -240,19 +240,58 @@ class TradingStrategyDiscoverySystem:
         print(f"  Top strategies selected: {overview['top_strategies_selected']}")
         print(f"  Categories analyzed: {overview['categories_analyzed']}")
         
-        print(f"\nTop Strategies by Category:")
-        for category, strategies in ranking_report['top_strategies'].items():
-            print(f"\n  {category.upper()}:")
-            for i, strategy in enumerate(strategies[:3]):  # Top 3 per category
-                metrics = strategy.metrics
-                print(f"    {i+1}. {strategy.strategy_name}")
-                print(f"       Description: {strategy.get_strategy_description()}")
-                print(f"       Sharpe Ratio: {metrics['sharpe_ratio']:.3f}")
-                print(f"       Total Return: {metrics['total_return']:.3f}")
-                print(f"       Win Rate: {metrics['win_rate']:.3f}")
-                print(f"       Max Drawdown: {metrics['max_drawdown']:.3f}")
+        print(f"\nTOP 20 BEST STRATEGIES (5 per category):")
+        print("="*80)
         
-        print(f"\nResults exported to: {RESULTS_DIR}")
+        all_top_strategies = []
+        for category, strategies in ranking_report['top_strategies'].items():
+            print(f"\n{category.upper()} CATEGORY:")
+            print("-" * 50)
+            
+            for i, strategy in enumerate(strategies[:5]):  # Top 5 per category
+                metrics = strategy.metrics
+                rank = i + 1
+                
+                print(f"{rank:2d}. {strategy.strategy_name}")
+                print(f"    Description: {strategy.get_strategy_description()}")
+                print(f"    Sharpe Ratio: {metrics['sharpe_ratio']:.3f}")
+                print(f"    Total Return: {metrics['total_return']:.3f}")
+                print(f"    Annual Return: {metrics['annual_return']:.3f}")
+                print(f"    Win Rate: {metrics['win_rate']:.3f}")
+                print(f"    Max Drawdown: {metrics['max_drawdown']:.3f}")
+                print(f"    Profit Factor: {metrics['profit_factor']:.3f}")
+                print(f"    Number of Trades: {metrics['num_trades']}")
+                print()
+                
+                # Add to overall list for Excel export
+                all_top_strategies.append({
+                    'rank': len(all_top_strategies) + 1,
+                    'category': category,
+                    'strategy_name': strategy.strategy_name,
+                    'description': strategy.get_strategy_description(),
+                    'sharpe_ratio': metrics['sharpe_ratio'],
+                    'total_return': metrics['total_return'],
+                    'annual_return': metrics['annual_return'],
+                    'win_rate': metrics['win_rate'],
+                    'max_drawdown': metrics['max_drawdown'],
+                    'profit_factor': metrics['profit_factor'],
+                    'num_trades': metrics['num_trades'],
+                    'volatility': metrics['volatility'],
+                    'avg_trade_return': metrics['avg_trade_return'],
+                    'max_consecutive_losses': metrics['max_consecutive_losses']
+                })
+        
+        # Save top 20 strategies to Excel
+        if all_top_strategies:
+            top_20_df = pd.DataFrame(all_top_strategies)
+            excel_file = RESULTS_DIR / 'top_20_strategies.xlsx'
+            top_20_df.to_excel(excel_file, index=False, sheet_name='Top_20_Strategies')
+            print(f"\n✅ TOP 20 STRATEGIES SAVED TO EXCEL: {excel_file}")
+        
+        print(f"\n📊 ALL RESULTS SAVED TO EXCEL:")
+        print(f"  - {RESULTS_DIR}/trading_strategy_results.xlsx (Complete results)")
+        print(f"  - {RESULTS_DIR}/top_20_strategies.xlsx (Top 20 strategies)")
+        print(f"  - {RESULTS_DIR}/ (Charts and reports)")
         print("="*80)
 
 def main():
