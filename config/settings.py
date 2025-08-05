@@ -48,11 +48,11 @@ INITIAL_CAPITAL = 100000
 COMMISSION_RATE = 0.001  # 0.1%
 SLIPPAGE = 0.0001  # 0.01%
 
-# Performance thresholds
-MIN_WIN_RATE = 0.4  # 40% win rate (reduced from 0.5)
-MIN_PROFIT_FACTOR = 1.0  # Break-even (reduced from 1.2)
-MAX_DRAWDOWN = 0.3  # 30% max drawdown (increased from 0.2)
-MIN_SHARPE_RATIO = 0.0  # Any positive Sharpe ratio (reduced from 0.5)
+# Performance thresholds - Very relaxed to show all strategies
+MIN_WIN_RATE = 0.1  # 10% win rate (very relaxed)
+MIN_PROFIT_FACTOR = 0.5  # Allow significant losses
+MAX_DRAWDOWN = 0.8  # Allow up to 80% drawdown
+MIN_SHARPE_RATIO = -2.0  # Allow negative Sharpe ratios
 
 # Mean reversion settings
 DISTANCE_THRESHOLDS = [0.01, 0.02, 0.03, 0.05, 0.08, 0.10, 0.15, 0.20]  # 1% to 20%
@@ -66,5 +66,5 @@ TEST_SIZE = 0.2
 CV_FOLDS = 5
 
 # Output settings
-TOP_STRATEGIES_PER_CATEGORY = 20
+TOP_STRATEGIES_PER_CATEGORY = 50  # Show top 50 per category
 SAVE_INTERMEDIATE_RESULTS = True
