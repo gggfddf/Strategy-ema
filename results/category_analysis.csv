@@ -1,1 +1,2 @@
-
+category,num_strategies,best_strategy,best_composite_score,avg_sharpe,avg_return,avg_win_rate
+unknown,960,Single_SMA_50_M1_position,-2.041313817695419,-8.92945087656055,,0.5030475441878202

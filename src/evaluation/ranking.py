@@ -37,7 +37,8 @@ class StrategyRanker:
     
     def filter_strategies(self, results: List[StrategyResult]) -> List[StrategyResult]:
         """Filter strategies based on performance criteria - NO FILTERING - Show ALL"""
-        # NO FILTERING - Return all results
+        # NO FILTERING AT ALL - Return all results
+        print(f"✅ NO FILTERING: Returning all {len(results)} results")
         return results
     
     def rank_strategies_by_category(self, results: List[StrategyResult]) -> Dict[str, List[StrategyResult]]:

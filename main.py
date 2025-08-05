@@ -93,14 +93,14 @@ class TradingStrategyDiscoverySystem:
             # Sort by total return
             all_results.sort(key=lambda x: x.metrics.get('total_return', 0), reverse=True)
             
-            # Show top 50 strategies
+            # Show ALL results (no filtering)
             print("\n" + "="*80)
-            print("TOP 50 STRATEGIES BY TOTAL RETURN")
+            print("ALL STRATEGIES BY TOTAL RETURN (NO FILTERING)")
             print("="*80)
             
-            for i, result in enumerate(all_results[:50]):
+            for i, result in enumerate(all_results):
                 metrics = result.metrics
-                print(f"\n{i+1:2d}. {result.strategy_name}")
+                print(f"\n{i+1:3d}. {result.strategy_name}")
                 print(f"    Description: {result.get_strategy_description()}")
                 print(f"    Total Return: {metrics.get('total_return', 0):.4f}")
                 print(f"    Annual Return: {metrics.get('annual_return', 0):.4f}")
@@ -110,12 +110,17 @@ class TradingStrategyDiscoverySystem:
                 print(f"    Profit Factor: {metrics.get('profit_factor', 0):.4f}")
                 print(f"    Number of Trades: {metrics.get('num_trades', 0)}")
                 print(f"    Volatility: {metrics.get('volatility', 0):.4f}")
+                
+                # Stop after showing first 50 for readability
+                if i >= 49:
+                    print(f"\n... and {len(all_results) - 50} more strategies")
+                    break
             
-            # Save top 50 to CSV
-            top_50_data = []
-            for i, result in enumerate(all_results[:50]):
+            # Save ALL results to CSV
+            all_data = []
+            for i, result in enumerate(all_results):
                 metrics = result.metrics
-                top_50_data.append({
+                all_data.append({
                     'rank': i + 1,
                     'strategy_name': result.strategy_name,
                     'description': result.get_strategy_description(),
@@ -131,21 +136,22 @@ class TradingStrategyDiscoverySystem:
                     'volatility': metrics.get('volatility', 0)
                 })
             
-            df = pd.DataFrame(top_50_data)
-            output_file = "results/top_50_strategies.csv"
+            df = pd.DataFrame(all_data)
+            output_file = "results/all_strategies_no_filtering.csv"
             df.to_csv(output_file, index=False)
-            print(f"\n✅ Top 50 strategies saved to: {output_file}")
+            print(f"\n✅ ALL {len(all_results)} strategies saved to: {output_file}")
             
             # Show summary statistics
             print(f"\n" + "="*80)
             print("SUMMARY STATISTICS")
             print("="*80)
             print(f"Total strategies tested: {len(all_results)}")
-            print(f"Best total return: {all_results[0].metrics.get('total_return', 0):.4f}")
-            print(f"Worst total return: {all_results[-1].metrics.get('total_return', 0):.4f}")
-            print(f"Average total return: {np.mean([r.metrics.get('total_return', 0) for r in all_results]):.4f}")
-            print(f"Average win rate: {np.mean([r.metrics.get('win_rate', 0) for r in all_results]):.4f}")
-            print(f"Average Sharpe ratio: {np.mean([r.metrics.get('sharpe_ratio', 0) for r in all_results]):.4f}")
+            if all_results:
+                print(f"Best total return: {all_results[0].metrics.get('total_return', 0):.4f}")
+                print(f"Worst total return: {all_results[-1].metrics.get('total_return', 0):.4f}")
+                print(f"Average total return: {np.mean([r.metrics.get('total_return', 0) for r in all_results]):.4f}")
+                print(f"Average win rate: {np.mean([r.metrics.get('win_rate', 0) for r in all_results]):.4f}")
+                print(f"Average Sharpe ratio: {np.mean([r.metrics.get('sharpe_ratio', 0) for r in all_results]):.4f}")
             
             # Continue with ranking
             ranking_report = self._rank_strategies()

@@ -5,7 +5,7 @@ Base strategy class for all trading strategies
 import pandas as pd
 import numpy as np
 from abc import ABC, abstractmethod
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional, Any
 import logging
 from dataclasses import dataclass
 
@@ -13,15 +13,40 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class StrategyResult:
-    """Container for strategy backtest results"""
+    """Result of a strategy backtest"""
     strategy_name: str
-    parameters: Dict
-    signals: pd.Series
-    returns: pd.Series
-    positions: pd.Series
-    equity_curve: pd.Series
-    trades: pd.DataFrame
-    metrics: Dict
+    parameters: Dict[str, Any]
+    metrics: Dict[str, float]
+    trades: List[Dict[str, Any]]
+    
+    def get_strategy_description(self) -> str:
+        """Get a human-readable description of the strategy"""
+        category = self.parameters.get('category', 'Unknown')
+        timeframe = self.parameters.get('timeframe', 'Unknown')
+        
+        if category == 'Single MA':
+            ma_type = self.parameters.get('ma_type', 'Unknown')
+            ma_period = self.parameters.get('ma_period', 'Unknown')
+            return f"Buy when price crosses above {ma_type}{ma_period} on {timeframe}"
+        elif category == 'MA Crossover':
+            fast_ma = self.parameters.get('fast_ma_type', 'Unknown')
+            fast_period = self.parameters.get('fast_ma_period', 'Unknown')
+            slow_ma = self.parameters.get('slow_ma_type', 'Unknown')
+            slow_period = self.parameters.get('slow_ma_period', 'Unknown')
+            return f"Buy when {fast_ma}{fast_period} crosses above {slow_ma}{slow_period} on {timeframe}"
+        elif category == 'Multi-Timeframe':
+            entry_tf = self.parameters.get('entry_timeframe', 'Unknown')
+            trend_tf = self.parameters.get('trend_timeframe', 'Unknown')
+            ma_type = self.parameters.get('ma_type', 'Unknown')
+            ma_period = self.parameters.get('ma_period', 'Unknown')
+            return f"Entry on {entry_tf}, trend confirmation on {trend_tf} with {ma_type}{ma_period}"
+        elif category == 'Mean Reversion':
+            ma_type = self.parameters.get('ma_type', 'Unknown')
+            ma_period = self.parameters.get('ma_period', 'Unknown')
+            distance = self.parameters.get('distance_threshold', 'Unknown')
+            return f"Buy when price is {distance} below {ma_type}{ma_period} on {timeframe}"
+        else:
+            return f"{category} strategy on {timeframe}"
 
 class BaseStrategy(ABC):
     """Base class for all trading strategies"""
@@ -96,12 +121,8 @@ class BaseStrategy(ABC):
         result = StrategyResult(
             strategy_name=self.name,
             parameters=self.parameters,
-            signals=signals,
-            returns=returns,
-            positions=positions,
-            equity_curve=equity_curve,
-            trades=trades,
-            metrics=metrics
+            metrics=metrics,
+            trades=trades.to_dict('records') # Convert DataFrame to list of dicts
         )
         
         return result
