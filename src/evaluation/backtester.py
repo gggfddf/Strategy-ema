@@ -227,10 +227,10 @@ class Backtester:
         
         # Calculate composite score
         summary_df['composite_score'] = (
-            summary_df['sharpe_ratio'] * 0.4 +
-            summary_df['total_return'] * 0.3 +
-            summary_df['win_rate'] * 0.2 +
-            (1 - abs(summary_df['max_drawdown'])) * 0.1
+            summary_df['sharpe_ratio'].fillna(0) * 0.4 +
+            summary_df['total_return'].fillna(0) * 0.3 +
+            summary_df['win_rate'].fillna(0) * 0.2 +
+            (1 - abs(summary_df['max_drawdown'].fillna(0))) * 0.1
         )
         
         summary_df['composite_rank'] = summary_df['composite_score'].rank(ascending=False)

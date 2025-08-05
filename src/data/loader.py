@@ -50,30 +50,46 @@ class DataLoader:
     
     def _load_single_file(self, file_path: Path) -> Optional[pd.DataFrame]:
         """
-        Load and validate a single CSV file
+        Load a single CSV file
         
         Args:
             file_path: Path to CSV file
             
         Returns:
-            Validated DataFrame or None if validation fails
+            DataFrame or None if loading fails
         """
         try:
-            # Try different timestamp column names
-            df = pd.read_csv(file_path)
+            logger.info(f"Loading {file_path}")
+            
+            # Try different delimiters
+            for delimiter in [',', '\t', ';']:
+                try:
+                    df = pd.read_csv(file_path, delimiter=delimiter)
+                    if len(df.columns) >= 5:  # At least OHLCV
+                        logger.info(f"Successfully loaded with delimiter '{delimiter}'")
+                        break
+                except:
+                    continue
+            else:
+                logger.error(f"Could not parse {file_path} with any delimiter")
+                return None
             
             # Standardize column names
             df = self._standardize_columns(df)
             
             # Validate data
-            if self._validate_data(df):
-                return self._preprocess_data(df)
-            else:
+            if not self._validate_data(df):
                 logger.error(f"Data validation failed for {file_path}")
                 return None
-                
+            
+            # Preprocess data
+            df = self._preprocess_data(df)
+            
+            logger.info(f"Successfully loaded {file_path} with shape {df.shape}")
+            return df
+            
         except Exception as e:
-            logger.error(f"Error reading {file_path}: {e}")
+            logger.error(f"Error loading {file_path}: {e}")
             return None
     
     def _standardize_columns(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -120,6 +136,7 @@ class DataLoader:
         missing_cols = set(self.required_columns) - set(df.columns)
         if missing_cols:
             logger.error(f"Missing required columns: {missing_cols}")
+            logger.info(f"Available columns: {list(df.columns)}")
             return False
         
         # Check for null values
@@ -127,12 +144,18 @@ class DataLoader:
         if null_counts.sum() > 0:
             logger.warning(f"Found null values: {null_counts}")
         
-        # Check data types
+        # Check data types and convert to numeric
         numeric_cols = ['open', 'high', 'low', 'close', 'volume']
         for col in numeric_cols:
             if col in df.columns:
                 try:
                     df[col] = pd.to_numeric(df[col], errors='coerce')
+                    # Fill NaN values with reasonable defaults
+                    if col == 'volume':
+                        df[col] = df[col].fillna(1000)  # Default volume
+                    else:
+                        # For price columns, forward fill then backward fill
+                        df[col] = df[col].fillna(method='ffill').fillna(method='bfill')
                 except:
                     logger.error(f"Column {col} cannot be converted to numeric")
                     return False
@@ -201,8 +224,8 @@ class DataLoader:
         if 'volume' in df.columns:
             invalid_volume = df['volume'] <= 0
             if invalid_volume.sum() > 0:
-                logger.warning(f"Found {invalid_volume.sum()} rows with invalid volume")
-                df.drop(df[invalid_volume].index, inplace=True)
+                logger.warning(f"Found {invalid_volume.sum()} rows with invalid volume, setting to default")
+                df.loc[invalid_volume, 'volume'] = 1000  # Set default volume instead of removing
         
         return True
     

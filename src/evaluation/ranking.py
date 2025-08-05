@@ -104,19 +104,31 @@ class StrategyRanker:
         for result in results:
             metrics = result.metrics
             
+            # Get metrics with safe defaults
+            sharpe_ratio = metrics.get('sharpe_ratio', 0)
+            total_return = metrics.get('total_return', 0)
+            win_rate = metrics.get('win_rate', 0)
+            max_drawdown = metrics.get('max_drawdown', 0)
+            
+            # Handle NaN values
+            if pd.isna(sharpe_ratio): sharpe_ratio = 0
+            if pd.isna(total_return): total_return = 0
+            if pd.isna(win_rate): win_rate = 0
+            if pd.isna(max_drawdown): max_drawdown = 0
+            
             # Composite score calculation
             composite_score = (
-                metrics['sharpe_ratio'] * 0.4 +
-                metrics['total_return'] * 0.3 +
-                metrics['win_rate'] * 0.2 +
-                (1 - abs(metrics['max_drawdown'])) * 0.1
+                sharpe_ratio * 0.4 +
+                total_return * 0.3 +
+                win_rate * 0.2 +
+                (1 - abs(max_drawdown)) * 0.1
             )
             
             # Store composite score in result
             result.metrics['composite_score'] = composite_score
         
         # Sort by composite score
-        ranked_results = sorted(results, key=lambda x: x.metrics['composite_score'], reverse=True)
+        ranked_results = sorted(results, key=lambda x: x.metrics.get('composite_score', 0), reverse=True)
         
         return ranked_results
     
@@ -164,13 +176,13 @@ class StrategyRanker:
                     'category': category,
                     'strategy_name': strategy.strategy_name,
                     'description': strategy.get_strategy_description(),
-                    'total_return': strategy.metrics['total_return'],
-                    'annual_return': strategy.metrics['annual_return'],
-                    'sharpe_ratio': strategy.metrics['sharpe_ratio'],
-                    'max_drawdown': strategy.metrics['max_drawdown'],
-                    'win_rate': strategy.metrics['win_rate'],
-                    'profit_factor': strategy.metrics['profit_factor'],
-                    'num_trades': strategy.metrics['num_trades'],
+                    'total_return': strategy.metrics.get('total_return', 0),
+                    'annual_return': strategy.metrics.get('annual_return', 0),
+                    'sharpe_ratio': strategy.metrics.get('sharpe_ratio', 0),
+                    'max_drawdown': strategy.metrics.get('max_drawdown', 0),
+                    'win_rate': strategy.metrics.get('win_rate', 0),
+                    'profit_factor': strategy.metrics.get('profit_factor', 0),
+                    'num_trades': strategy.metrics.get('num_trades', 0),
                     'composite_score': strategy.metrics.get('composite_score', 0),
                     'parameters': strategy.parameters
                 })
@@ -242,7 +254,20 @@ class StrategyRanker:
         
         # Generate summaries
         strategy_summary = self.get_strategy_summary(top_strategies)
-        category_analysis = self.analyze_category_performance(results)
+        # Generate category analysis
+        category_analysis = []
+        for category, category_results in top_strategies.items():
+            if category_results:
+                best_strategy = max(category_results, key=lambda x: x.metrics.get('composite_score', 0))
+                category_analysis.append({
+                    'category': category,
+                    'num_strategies': len(category_results),
+                    'best_strategy': best_strategy.strategy_name,
+                    'best_composite_score': best_strategy.metrics.get('composite_score', 0),
+                    'avg_sharpe': np.mean([r.metrics.get('sharpe_ratio', 0) for r in category_results]),
+                    'avg_return': np.mean([r.metrics.get('total_return', 0) for r in category_results]),
+                    'avg_win_rate': np.mean([r.metrics.get('win_rate', 0) for r in category_results])
+                })
         
         # Calculate overall statistics
         total_strategies = len(results)

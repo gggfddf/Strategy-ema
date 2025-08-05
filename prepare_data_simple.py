@@ -44,7 +44,15 @@ def prepare_data():
                         high_price = float(row[3])
                         low_price = float(row[4])
                         close_price = float(row[5])
-                        volume = int(row[7]) if len(row) > 7 else 1000  # Default volume
+                        volume = int(row[7]) if len(row) > 7 and row[7].isdigit() else 1000  # Default volume if invalid
+                        
+                        # Validate price data
+                        if open_price <= 0 or high_price <= 0 or low_price <= 0 or close_price <= 0:
+                            continue  # Skip invalid price data
+                        
+                        # Ensure volume is positive
+                        if volume <= 0:
+                            volume = 1000  # Default volume
                         
                         # Create standardized row
                         new_row = [
