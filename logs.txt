@@ -1,0 +1,426 @@
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+CC:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  formanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+INFO:__main__:Feature summary:
+INFO:__main__:   timeframe  total_features  ma_features  crossover_features  mean_reversion_features  trend_alignment_features  rows
+0         M1            3607            0                   0                        0                         0     0
+1         M2            3607            0                   0                        0                         0     0
+2         M3            3607            0                   0                        0                         0     0
+3         M5            3607            0                   0                        0                         0     0
+4        M10            3607            0                   0                        0                         0     0
+5        M15            3607            0                   0                        0                         0     0
+6        M30            3607            0                   0                        0                         0     0
+7         H1            3607            0                   0                        0                         0     0
+8         H2            3607            0                   0                        0                         0     0
+9         H4            3607            0                   0                        0                         0     0
+10        H6            3607            0                   0                        0                         0     0
+11        H8            3607            0                   0                        0                         0     0
+12       H12            3607            0                   0                        0                         0     0
+13         D            3607            0                   0                        0                         0     0
+14         W            3607            0                   0                        0                         0     0
+15         M            3607            0                   0                        0                         0     0
+INFO:__main__:Step 4: Generating strategies...
+INFO:__main__:Generating strategies...
+INFO:__main__:Generating Single MA strategies...
+INFO:src.strategies.ma_single:Generated 384 filtered Single MA strategies
+INFO:__main__:Generating MA Crossover strategies...
+INFO:src.strategies.ma_crossover:Generated 112 filtered MA crossover strategies
+INFO:__main__:Generating Multi-Timeframe strategies...
+INFO:src.strategies.multi_tf:Generated 96 filtered multi-timeframe strategies
+INFO:__main__:Generating Mean Reversion strategies...
+INFO:src.strategies.mean_reversion:Generated 2160 filtered mean reversion strategies
+INFO:__main__:Generated 2752 total strategies
+INFO:__main__:Step 5: Backtesting strategies...
+INFO:__main__:Backtesting strategies...
+INFO:src.evaluation.backtester:Validating 2752 strategies...
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_50_bullish', 'trend_aligned_H1_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H1_sma_50_above', 'price_aligned_H1_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_50_bullish', 'trend_aligned_H1_sma_50_bearish', 'price_aligned_H1_sma_50_above', 'price_aligned_H1_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_100_bullish', 'trend_aligned_H1_sma_100_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H1_sma_100_above', 'price_aligned_H1_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_100_bullish', 'trend_aligned_H1_sma_100_bearish', 'price_aligned_H1_sma_100_above', 'price_aligned_H1_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_ema_26_bullish', 'trend_aligned_H1_ema_26_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H1_ema_26_above', 'price_aligned_H1_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_ema_26_bullish', 'trend_aligned_H1_ema_26_bearish', 'price_aligned_H1_ema_26_above', 'price_aligned_H1_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_50_bullish', 'trend_aligned_H1_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H1_sma_50_above', 'price_aligned_H1_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_50_bullish', 'trend_aligned_H1_sma_50_bearish', 'price_aligned_H1_sma_50_above', 'price_aligned_H1_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_50_bullish', 'trend_aligned_H1_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H1_sma_50_above', 'price_aligned_H1_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_50_bullish', 'trend_aligned_H1_sma_50_bearish', 'price_aligned_H1_sma_50_above', 'price_aligned_H1_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_100_bullish', 'trend_aligned_H1_sma_100_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H1_sma_100_above', 'price_aligned_H1_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_100_bullish', 'trend_aligned_H1_sma_100_bearish', 'price_aligned_H1_sma_100_above', 'price_aligned_H1_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_ema_26_bullish', 'trend_aligned_H1_ema_26_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H1_ema_26_above', 'price_aligned_H1_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_ema_26_bullish', 'trend_aligned_H1_ema_26_bearish', 'price_aligned_H1_ema_26_above', 'price_aligned_H1_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_50_bullish', 'trend_aligned_H1_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H1_sma_50_above', 'price_aligned_H1_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_50_bullish', 'trend_aligned_H1_sma_50_bearish', 'price_aligned_H1_sma_50_above', 'price_aligned_H1_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_50_bullish', 'trend_aligned_H1_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H1_sma_50_above', 'price_aligned_H1_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_50_bullish', 'trend_aligned_H1_sma_50_bearish', 'price_aligned_H1_sma_50_above', 'price_aligned_H1_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_100_bullish', 'trend_aligned_H1_sma_100_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H1_sma_100_above', 'price_aligned_H1_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_100_bullish', 'trend_aligned_H1_sma_100_bearish', 'price_aligned_H1_sma_100_above', 'price_aligned_H1_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_ema_26_bullish', 'trend_aligned_H1_ema_26_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H1_ema_26_above', 'price_aligned_H1_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_ema_26_bullish', 'trend_aligned_H1_ema_26_bearish', 'price_aligned_H1_ema_26_above', 'price_aligned_H1_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_50_bullish', 'trend_aligned_H1_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H1_sma_50_above', 'price_aligned_H1_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H1_sma_50_bullish', 'trend_aligned_H1_sma_50_bearish', 'price_aligned_H1_sma_50_above', 'price_aligned_H1_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_sma_50_bullish', 'trend_aligned_H4_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H4_sma_50_above', 'price_aligned_H4_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_sma_50_bullish', 'trend_aligned_H4_sma_50_bearish', 'price_aligned_H4_sma_50_above', 'price_aligned_H4_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_sma_100_bullish', 'trend_aligned_H4_sma_100_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H4_sma_100_above', 'price_aligned_H4_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_sma_100_bullish', 'trend_aligned_H4_sma_100_bearish', 'price_aligned_H4_sma_100_above', 'price_aligned_H4_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_ema_26_bullish', 'trend_aligned_H4_ema_26_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H4_ema_26_above', 'price_aligned_H4_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_ema_26_bullish', 'trend_aligned_H4_ema_26_bearish', 'price_aligned_H4_ema_26_above', 'price_aligned_H4_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_sma_50_bullish', 'trend_aligned_H4_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H4_sma_50_above', 'price_aligned_H4_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_sma_50_bullish', 'trend_aligned_H4_sma_50_bearish', 'price_aligned_H4_sma_50_above', 'price_aligned_H4_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_50_bullish', 'trend_aligned_D_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_D_sma_50_above', 'price_aligned_D_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_50_bullish', 'trend_aligned_D_sma_50_bearish', 'price_aligned_D_sma_50_above', 'price_aligned_D_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_100_bullish', 'trend_aligned_D_sma_100_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_D_sma_100_above', 'price_aligned_D_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_100_bullish', 'trend_aligned_D_sma_100_bearish', 'price_aligned_D_sma_100_above', 'price_aligned_D_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_ema_26_bullish', 'trend_aligned_D_ema_26_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_D_ema_26_above', 'price_aligned_D_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_ema_26_bullish', 'trend_aligned_D_ema_26_bearish', 'price_aligned_D_ema_26_above', 'price_aligned_D_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_50_bullish', 'trend_aligned_D_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_D_sma_50_above', 'price_aligned_D_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_50_bullish', 'trend_aligned_D_sma_50_bearish', 'price_aligned_D_sma_50_above', 'price_aligned_D_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_50_bullish', 'trend_aligned_D_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_D_sma_50_above', 'price_aligned_D_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_50_bullish', 'trend_aligned_D_sma_50_bearish', 'price_aligned_D_sma_50_above', 'price_aligned_D_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_100_bullish', 'trend_aligned_D_sma_100_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_D_sma_100_above', 'price_aligned_D_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_100_bullish', 'trend_aligned_D_sma_100_bearish', 'price_aligned_D_sma_100_above', 'price_aligned_D_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_ema_26_bullish', 'trend_aligned_D_ema_26_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_D_ema_26_above', 'price_aligned_D_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_ema_26_bullish', 'trend_aligned_D_ema_26_bearish', 'price_aligned_D_ema_26_above', 'price_aligned_D_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_50_bullish', 'trend_aligned_D_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_D_sma_50_above', 'price_aligned_D_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_50_bullish', 'trend_aligned_D_sma_50_bearish', 'price_aligned_D_sma_50_above', 'price_aligned_D_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_sma_50_bullish', 'trend_aligned_H4_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H4_sma_50_above', 'price_aligned_H4_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_sma_50_bullish', 'trend_aligned_H4_sma_50_bearish', 'price_aligned_H4_sma_50_above', 'price_aligned_H4_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_sma_100_bullish', 'trend_aligned_H4_sma_100_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H4_sma_100_above', 'price_aligned_H4_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_sma_100_bullish', 'trend_aligned_H4_sma_100_bearish', 'price_aligned_H4_sma_100_above', 'price_aligned_H4_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_ema_26_bullish', 'trend_aligned_H4_ema_26_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H4_ema_26_above', 'price_aligned_H4_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_ema_26_bullish', 'trend_aligned_H4_ema_26_bearish', 'price_aligned_H4_ema_26_above', 'price_aligned_H4_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_sma_50_bullish', 'trend_aligned_H4_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_H4_sma_50_above', 'price_aligned_H4_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_H4_sma_50_bullish', 'trend_aligned_H4_sma_50_bearish', 'price_aligned_H4_sma_50_above', 'price_aligned_H4_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_50_bullish', 'trend_aligned_D_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_D_sma_50_above', 'price_aligned_D_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_50_bullish', 'trend_aligned_D_sma_50_bearish', 'price_aligned_D_sma_50_above', 'price_aligned_D_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_100_bullish', 'trend_aligned_D_sma_100_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_D_sma_100_above', 'price_aligned_D_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_100_bullish', 'trend_aligned_D_sma_100_bearish', 'price_aligned_D_sma_100_above', 'price_aligned_D_sma_100_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_ema_26_bullish', 'trend_aligned_D_ema_26_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_D_ema_26_above', 'price_aligned_D_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_ema_26_bullish', 'trend_aligned_D_ema_26_bearish', 'price_aligned_D_ema_26_above', 'price_aligned_D_ema_26_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_50_bullish', 'trend_aligned_D_sma_50_bearish']
+ERROR:src.strategies.multi_tf:Missing features: ['price_aligned_D_sma_50_above', 'price_aligned_D_sma_50_below']
+ERROR:src.strategies.multi_tf:Missing features: ['trend_aligned_D_sma_50_bullish', 'trend_aligned_D_sma_50_bearish', 'price_aligned_D_sma_50_above', 'price_aligned_D_sma_50_below']
+INFO:src.evaluation.backtester:Found 0 valid strategies out of 2752
+INFO:__main__:Found 0 valid strategies out of 2752
+INFO:src.evaluation.backtester:Starting parallel backtest of 0 strategies...
+INFO:src.evaluation.backtester:Completed parallel backtest of 0 strategies
+INFO:__main__:Step 6: Ranking and selecting top strategies...
+INFO:__main__:Ranking strategies...
+INFO:src.evaluation.ranking:Filtered 0 strategies from 0 total
+INFO:src.evaluation.ranking:Exported ranking results to Excel file: C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\results\trading_strategy_results.xlsx
+INFO:src.evaluation.ranking:Also saved CSV versions for compatibility
+INFO:__main__:Step 7: Generating reports and visualizations...
+INFO:__main__:Generating reports and visualizations...
+INFO:src.visualization.reports:Generating comprehensive report...
+INFO:src.visualization.reports:Comprehensive report generated in C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\results
+
+================================================================================
+TRADING STRATEGY DISCOVERY SYSTEM - RESULTS SUMMARY
+================================================================================
+
+Overview:
+  Total strategies tested: 0
+  Strategies meeting criteria: 0
+  Top strategies selected: 0
+  Categories analyzed: 0
+
+TOP 20 BEST STRATEGIES (5 per category):
+================================================================================
+
+📊 ALL RESULTS SAVED TO EXCEL:
+  - C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\results/trading_strategy_results.xlsx (Complete results)
+  - C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\results/top_20_strategies.xlsx (Top 20 strategies)
+  - C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\results/ (Charts and reports)
+================================================================================
+INFO:__main__:Trading Strategy Discovery System completed successfully!
+(TraeAI-7) C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275 [0:0] $
+(TraeAI-7) C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275 [0:0] $
+enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_zscore"] = self._compute_zscore(df['close'], ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:60: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[col_name] = ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:63: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_above_{col_name}"] = df['close'] > ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:64: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"price_below_{col_name}"] = df['close'] < ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:67: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"{col_name}_slope"] = self._compute_ma_slope(ma_values)
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:70: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  enhanced_df[f"distance_from_{col_name}"] = (df['close'] - ma_values) / ma_values
+C:\Users\admin1\Desktop\Strategy-ema-cursor-discover-top-trading-strategies-from-ohlcv-data-4275\src\data\feature_engineer.py:73: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
