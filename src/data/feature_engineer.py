@@ -33,13 +33,19 @@ class FeatureEngineer:
         for tf_name, df in timeframe_data.items():
             try:
                 logger.info(f"Computing MAs for {tf_name} timeframe...")
+                
+                # Skip if no data
+                if df.empty:
+                    logger.warning(f"No data for {tf_name} timeframe, skipping")
+                    enhanced_data[tf_name] = df
+                    continue
+                
                 enhanced_df = self._compute_timeframe_mas(df, tf_name)
                 enhanced_data[tf_name] = enhanced_df
                 logger.info(f"Completed MAs for {tf_name}: {enhanced_df.shape}")
             except Exception as e:
                 logger.error(f"Error computing MAs for {tf_name}: {e}")
-                # Return original dataframe if MA computation fails
-                enhanced_data[tf_name] = df
+                enhanced_data[tf_name] = df  # Return original data if error
         
         return enhanced_data
     
@@ -239,26 +245,36 @@ class FeatureEngineer:
         Generate multi-timeframe features
         
         Args:
-            timeframe_data: Dictionary of timeframe DataFrames with MAs
+            timeframe_data: Dictionary of timeframe DataFrames
             
         Returns:
-            Dictionary with multi-timeframe features
+            Dictionary with enhanced DataFrames
         """
         enhanced_data = {}
         
-        for tf_name, df in timeframe_data.items():
-            enhanced_df = df.copy()
-            
-            # Add features from other timeframes
-            for other_tf, other_df in timeframe_data.items():
-                if other_tf != tf_name:
-                    # Resample other timeframe to match current timeframe
-                    aligned_df = self._align_timeframes(df, other_df)
-                    
-                    # Add trend alignment features
-                    enhanced_df = self._add_trend_alignment_features(enhanced_df, aligned_df, other_tf)
-            
-            enhanced_data[tf_name] = enhanced_df
+        for target_tf, target_df in timeframe_data.items():
+            try:
+                logger.info(f"Generating multi-timeframe features for {target_tf}...")
+                
+                if target_df.empty:
+                    logger.warning(f"No data for {target_tf}, skipping multi-timeframe features")
+                    enhanced_data[target_tf] = target_df
+                    continue
+                
+                enhanced_df = target_df.copy()
+                
+                # Generate features from other timeframes
+                for source_tf, source_df in timeframe_data.items():
+                    if source_tf != target_tf and not source_df.empty:
+                        enhanced_df = self._add_trend_alignment_features(enhanced_df, source_df, source_tf)
+                        enhanced_df = self._add_price_alignment_features(enhanced_df, source_df, source_tf)
+                
+                enhanced_data[target_tf] = enhanced_df
+                logger.info(f"Completed multi-timeframe features for {target_tf}: {enhanced_df.shape}")
+                
+            except Exception as e:
+                logger.error(f"Error generating multi-timeframe features for {target_tf}: {e}")
+                enhanced_data[target_tf] = target_df
         
         return enhanced_data
     
@@ -297,29 +313,64 @@ class FeatureEngineer:
         for ma_col in source_ma_cols:
             ma_info = self._parse_ma_column(ma_col)
             if ma_info:
-                # Add slope alignment features
-                slope_col = f"{ma_col}_slope"
-                if slope_col in source_df.columns:
-                    enhanced_df[f"trend_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_bullish"] = source_df[slope_col] > 0
-                    enhanced_df[f"trend_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_bearish"] = source_df[slope_col] < 0
-                else:
-                    # Create slope if it doesn't exist
-                    ma_values = source_df[ma_col]
-                    slope_values = self._compute_ma_slope(ma_values)
-                    enhanced_df[f"trend_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_bullish"] = slope_values > 0
-                    enhanced_df[f"trend_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_bearish"] = slope_values < 0
+                ma_type, period = ma_info
                 
-                # Add price vs MA alignment
-                price_above_col = f"price_above_{ma_col}"
-                if price_above_col in source_df.columns:
-                    enhanced_df[f"price_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_above"] = source_df[price_above_col]
-                    enhanced_df[f"price_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_below"] = ~source_df[price_above_col]
-                else:
-                    # Create price alignment if it doesn't exist
-                    close_col = 'close' if 'close' in source_df.columns else source_df.columns[0]
-                    price_above = source_df[close_col] > source_df[ma_col]
-                    enhanced_df[f"price_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_above"] = price_above
-                    enhanced_df[f"price_aligned_{source_tf}_{ma_info['type']}_{ma_info['period']}_below"] = ~price_above
+                # Create trend alignment features
+                bullish_col = f"trend_aligned_{source_tf}_{ma_type}_{period}_bullish"
+                bearish_col = f"trend_aligned_{source_tf}_{ma_type}_{period}_bearish"
+                
+                # Calculate trend direction (slope)
+                ma_values = source_df[ma_col]
+                ma_slope = ma_values.diff(periods=1)
+                
+                # Create boolean features
+                enhanced_df[bullish_col] = ma_slope > 0
+                enhanced_df[bearish_col] = ma_slope < 0
+                
+                # Fill NaN values with False
+                enhanced_df[bullish_col] = enhanced_df[bullish_col].fillna(False)
+                enhanced_df[bearish_col] = enhanced_df[bearish_col].fillna(False)
+        
+        return enhanced_df
+    
+    def _add_price_alignment_features(self, target_df: pd.DataFrame, source_df: pd.DataFrame, source_tf: str) -> pd.DataFrame:
+        """
+        Add price alignment features from source timeframe
+        
+        Args:
+            target_df: Target timeframe DataFrame
+            source_df: Source timeframe DataFrame
+            source_tf: Source timeframe name
+            
+        Returns:
+            DataFrame with price alignment features
+        """
+        enhanced_df = target_df.copy()
+        
+        # Get MA columns from source timeframe
+        source_ma_cols = [col for col in source_df.columns if any(ma_type in col for ma_type in self.ma_types)]
+        
+        for ma_col in source_ma_cols:
+            ma_info = self._parse_ma_column(ma_col)
+            if ma_info:
+                ma_type, period = ma_info
+                
+                # Create price alignment features
+                above_col = f"price_aligned_{source_tf}_{ma_type}_{period}_above"
+                below_col = f"price_aligned_{source_tf}_{ma_type}_{period}_below"
+                
+                # Get close price and MA values
+                close_col = 'close' if 'close' in source_df.columns else source_df.columns[0]
+                close_values = source_df[close_col]
+                ma_values = source_df[ma_col]
+                
+                # Create boolean features
+                enhanced_df[above_col] = close_values > ma_values
+                enhanced_df[below_col] = close_values < ma_values
+                
+                # Fill NaN values with False
+                enhanced_df[above_col] = enhanced_df[above_col].fillna(False)
+                enhanced_df[below_col] = enhanced_df[below_col].fillna(False)
         
         return enhanced_df
     

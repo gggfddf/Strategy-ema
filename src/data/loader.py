@@ -155,7 +155,7 @@ class DataLoader:
                         df[col] = df[col].fillna(1000)  # Default volume
                     else:
                         # For price columns, forward fill then backward fill
-                        df[col] = df[col].fillna(method='ffill').fillna(method='bfill')
+                        df[col] = df[col].ffill().bfill()
                 except:
                     logger.error(f"Column {col} cannot be converted to numeric")
                     return False

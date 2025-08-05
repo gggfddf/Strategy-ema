@@ -269,6 +269,8 @@ class StrategyRanker:
                     'avg_win_rate': np.mean([r.metrics.get('win_rate', 0) for r in category_results])
                 })
         
+        category_analysis_df = pd.DataFrame(category_analysis)
+        
         # Calculate overall statistics
         total_strategies = len(results)
         filtered_strategies = len([r for r in results if self._meets_thresholds(r)])
@@ -283,7 +285,7 @@ class StrategyRanker:
             },
             'top_strategies': top_strategies,
             'strategy_summary': strategy_summary,
-            'category_analysis': category_analysis,
+            'category_analysis': category_analysis_df,
             'filtering_criteria': {
                 'min_win_rate': self.min_win_rate,
                 'min_profit_factor': self.min_profit_factor,

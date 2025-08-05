@@ -45,48 +45,42 @@ class SingleMAStrategy(BaseStrategy):
         Generate trading signals based on price vs MA relationship
         
         Args:
-            data: OHLCV DataFrame with MA features
+            data: DataFrame with OHLCV and MA data
             
         Returns:
             Series with signals (1 for buy, -1 for sell, 0 for hold)
         """
-        # Get MA column name
+        signals = pd.Series(0, index=data.index)
+        
+        # Get MA column
         ma_col = f"{self.ma_type.lower()}_{self.ma_period}"
         
         if ma_col not in data.columns:
-            logger.error(f"MA column {ma_col} not found in data")
-            return pd.Series(0, index=data.index)
+            logger.warning(f"MA column {ma_col} not found in data")
+            return signals
         
-        # Get price vs MA features
-        price_above_col = f"price_above_{ma_col}"
-        price_below_col = f"price_below_{ma_col}"
+        # Get price and MA data
+        close_col = 'close' if 'close' in data.columns else data.columns[0]
+        price = data[close_col]
+        ma = data[ma_col]
         
-        if price_above_col not in data.columns or price_below_col not in data.columns:
-            logger.error(f"Price vs MA feature columns not found")
-            return pd.Series(0, index=data.index)
-        
-        signals = pd.Series(0, index=data.index)
+        # Handle NaN values
+        price = price.ffill().bfill()
+        ma = ma.ffill().bfill()
         
         if self.signal_type == 'crossover':
-            # Crossover signals
-            # Buy when price crosses above MA
-            buy_signal = (data[price_above_col] & ~data[price_above_col].shift(1))
-            # Sell when price crosses below MA
-            sell_signal = (data[price_below_col] & ~data[price_below_col].shift(1))
+            # Generate crossover signals
+            price_above_ma = price > ma
+            crossover_up = price_above_ma & ~price_above_ma.shift(1)
+            crossover_down = ~price_above_ma & price_above_ma.shift(1)
             
-            signals[buy_signal] = 1
-            signals[sell_signal] = -1
+            signals[crossover_up] = 1
+            signals[crossover_down] = -1
             
         elif self.signal_type == 'position':
-            # Position-based signals
-            # Buy when price is above MA
-            signals[data[price_above_col]] = 1
-            # Sell when price is below MA
-            signals[data[price_below_col]] = -1
-            
-        else:
-            logger.error(f"Unknown signal type: {self.signal_type}")
-            return pd.Series(0, index=data.index)
+            # Generate position-based signals
+            signals[price > ma] = 1
+            signals[price < ma] = -1
         
         return signals
     
